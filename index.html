@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="style.css" rel="stylesheet" type="text" />
+    <title>Online Shopping App</title>
+  </head>
+  <style>
+    body {
+      background-color: antiquewhite;
+      margin: 0px;
+      padding: 0px;
+    }
+    p {
+      font-weight: bolder;
+    }
+    h1 {
+      text-align: center;
+    }
+    .maicontainer {
+      background-color: white;
+      padding: 10px 10px;
+      margin: auto;
+      max-width: 800px;
+      border-radius: 10px;
+      box-shadow: 0px 2px 5px 0px;
+      border: none;
+    }
+    .productscontainer {
+      display: flex;
+      justify-content: space-between;
+      border: 2px solid black;
+      padding: 5px 5px;
+      border-radius: 10px;
+      margin: 5px 0px;
+    }
+    button {
+      height: 40px;
+      width: 120px;
+      background-color: deeppink;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 0px 10px;
+      cursor: pointer;
+    }
+    h4 {
+      display: flex;
+      justify-content: end;
+      font-size: larger;
+    }
+    .lastbtns {
+      height: 40px;
+      width: 130px;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 0px 10px;
+      margin: 0px 5px;
+      cursor: pointer;
+    }
+    .cartscontainer {
+      display: flex;
+      justify-content: space-between;
+      border: 2px solid black;
+      padding: 5px 5px;
+      border-radius: 10px;
+      margin: 5px 0px;
+    }
+    #feedback {
+      position: fixed;
+      top: 60px;
+      right: 5px;
+      padding: 5px 10px;
+    }
+  </style>
+
+  <body>
+    <h1>Online Shopping</h1>
+    <div class="maicontainer">
+      <p id="feedback"></p>
+      <h2>Available Products</h2>
+      <div id="divproductscontainer"></div>
+
+      <h2>MyCart</h2>
+      <div id="cartscontainer"></div>
+
+      <h4>Total Amount: Rs. 0.00</h4>
+      <h2>Actions</h2>
+      <button class="lastbtns">Sort cart by Price</button>
+      <button class="lastbtns">Clear All</button>
+    </div>
+
+    <script src="JavaScrpt.js"></script>
+  </body>
+</html>
