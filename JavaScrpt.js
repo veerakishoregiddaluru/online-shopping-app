@@ -7,27 +7,27 @@ const products = [
   {
     id: 1,
     name: "Buds",
-    price: 1500,
+    price: "Rs.1500",
   },
   {
     id: 2,
     name: "Mobile",
-    price: 15000,
+    price: "Rs.15000",
   },
   {
     id: 3,
     name: "Charger",
-    price: 500,
+    price: "Rs.500",
   },
   {
     id: 4,
     name: "Power Bank",
-    price: 2000,
+    price: "Rs.2000",
   },
   {
     id: 5,
     name: "HeadPhones",
-    price: 3000,
+    price: "Rs.3000",
   },
 ];
 
