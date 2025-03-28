@@ -1,45 +1,53 @@
 const divProductsContainer = document.getElementById("divproductscontainer");
 const cartsContainer = document.getElementById("cartscontainer");
+const clearAll = document.getElementById("clearall");
+const sortBy = document.getElementById("sortBy");
 const feedBack = document.getElementById("feedback");
+const tSum = document.getElementById("totalprice");
 
 const cart = [];
 const products = [
   {
     id: 1,
     name: "Buds",
-    price: "Rs.1500",
+    price: 1500,
   },
   {
     id: 2,
     name: "Mobile",
-    price: "Rs.15000",
+    price: 15000,
   },
   {
     id: 3,
     name: "Charger",
-    price: "Rs.500",
+    price: 500,
   },
   {
     id: 4,
     name: "Power Bank",
-    price: "Rs.2000",
+    price: 2000,
   },
   {
     id: 5,
     name: "HeadPhones",
-    price: "Rs.3000",
+    price: 3000,
   },
 ];
+renderingProducts();
+sortByPrice();
+clearAllItem();
 
-products.forEach(function (product) {
-  const productRow = `<div class="productscontainer"><p>${product.name} - ${product.price}</p>
+function renderingProducts() {
+  products.forEach(function (product) {
+    const productRow = `<div class="productscontainer"><p>${product.name} - Rs. ${product.price}</p>
+  
+          <button id="productscontainerbtn" onclick="addToCart(${product.id} 
+          )">Add to Cart</button></div>
+        `;
 
-        <button id="productscontainerbtn" onclick="addToCart(${product.id} 
-        )">Add to Cart</button></div>
-      `;
-
-  divProductsContainer.insertAdjacentHTML("beforeend", productRow);
-});
+    divProductsContainer.insertAdjacentHTML("beforeend", productRow);
+  });
+}
 
 function addToCart(id) {
   const isProductAvailable = cart.some(function (product) {
@@ -52,16 +60,52 @@ function addToCart(id) {
   const productToAdd = products.find(function (product) {
     return product.id === id;
   });
+
   cart.push(productToAdd);
   console.log(productToAdd);
-  const { id: myId, name, price } = productToAdd;
-  const cartRow = `<div class="cartscontainer" ><p>${name} - ${price}</p>
+  renderDetails();
+  // console.log((feedBack.textContent = `${name} Added to the Cart`));
+  updatedUserFeedback(`${productToAdd.name} Added to the Cart`, "success");
+}
 
-        <button>Remove</button></div>`;
+function removeFromCart(id) {
+  // const updatedCart = cart.filter(function (products) {
+  //   return products.id !== id;
+  // });
 
-  cartsContainer.insertAdjacentHTML("beforeend", cartRow);
-  console.log((feedBack.textContent = `${name} Added to the Cart`));
-  updatedUserFeedback(`${name} Added to the Cart`, "success");
+  const productToAdd = products.find(function (product) {
+    return product.id === id;
+  });
+  const findIndex = cart.findIndex((product) => {
+    return product.id === id;
+  });
+
+  const spliceResult = cart.splice(findIndex, 1);
+
+  updatedUserFeedback(`${productToAdd.name} Removed from th cart`, "error");
+  renderDetails();
+}
+
+function renderDetails() {
+  cartsContainer.innerHTML = "";
+  cart.forEach((product) => {
+    const { id, name, price } = product;
+    const cartRow = `<div class="cartscontainer" ><p>${name} - ${price}</p>
+
+        <button onclick="removeFromCart(${id})">Remove</button></div>`;
+
+    cartsContainer.insertAdjacentHTML("beforeend", cartRow);
+  });
+  // let totalSum = 0;
+  // for (let i = 0; i < cart.length; i++) {
+  //   totalSum = totalSum + cart[i].price;
+  // }
+
+  const totalSum = cart.reduce(function (acc, curProduct) {
+    return acc + curProduct.price;
+  }, 0);
+
+  tSum.textContent = `Total Amount Rs.${totalSum}`;
 }
 let timerId;
 function updatedUserFeedback(msg, type) {
@@ -79,4 +123,22 @@ function updatedUserFeedback(msg, type) {
   timerId = setTimeout(() => {
     feedBack.style.display = "none";
   }, 3000);
+}
+
+function clearAllItem() {
+  clearAll.addEventListener("click", function () {
+    console.log("Clear all", cart);
+    cart.length = 0;
+    renderDetails();
+    updatedUserFeedback("Cart is Cleared!", "success");
+  });
+}
+
+function sortByPrice() {
+  sortBy.addEventListener("click", function () {
+    cart.sort(function (item1, item2) {
+      return item1.price - item2.price;
+    });
+    renderDetails();
+  });
 }
