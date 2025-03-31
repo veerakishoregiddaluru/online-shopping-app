@@ -5,6 +5,10 @@ const sortBy = document.getElementById("sortBy");
 const feedBack = document.getElementById("feedback");
 const tSum = document.getElementById("totalprice");
 
+const canNotAddSound = new Audio("notadd.wav");
+const clearAllSound = new Audio("clearall.wav");
+const removeSound = new Audio("remove.wav");
+
 const cart = [];
 const products = [
   {
@@ -55,6 +59,9 @@ function addToCart(id) {
   });
   if (isProductAvailable) {
     updatedUserFeedback(`Item Already Added to the Cart`, "error");
+    canNotAddSound.pause;
+    canNotAddSound.currentTime = 0;
+    canNotAddSound.play();
     return;
   }
   const productToAdd = products.find(function (product) {
@@ -72,7 +79,9 @@ function removeFromCart(id) {
   // const updatedCart = cart.filter(function (products) {
   //   return products.id !== id;
   // });
-
+  removeSound.pause;
+  removeSound.currentTime = 0;
+  removeSound.play();
   const productToAdd = products.find(function (product) {
     return product.id === id;
   });
@@ -131,6 +140,9 @@ function clearAllItem() {
     cart.length = 0;
     renderDetails();
     updatedUserFeedback("Cart is Cleared!", "success");
+    clearAllSound.pause;
+    clearAllSound.currentTime = 0;
+    clearAllSound.play();
   });
 }
 
