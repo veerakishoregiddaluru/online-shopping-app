@@ -139,7 +139,7 @@ function clearAllItem() {
     console.log("Clear all", cart);
     cart.length = 0;
     renderDetails();
-    updatedUserFeedback("Cart is Cleared!", "success");
+    updatedUserFeedback("Cart Cleared!", "success");
     clearAllSound.pause;
     clearAllSound.currentTime = 0;
     clearAllSound.play();
